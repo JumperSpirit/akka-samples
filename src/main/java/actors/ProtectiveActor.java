@@ -4,13 +4,9 @@ import actors.comands.BadCommand;
 import actors.comands.HandledComand;
 import actors.exceptions.SupectCommandeException;
 import akka.actor.AbstractActor;
-import akka.actor.Actor;
 import akka.actor.ActorRef;
-import akka.actor.Status;
 import akka.event.Logging;
 import akka.event.LoggingAdapter;
-
-import java.util.Optional;
 
 public class ProtectiveActor  extends AbstractActor {
 
@@ -35,7 +31,7 @@ public class ProtectiveActor  extends AbstractActor {
     private void sendException(BadCommand comand,
                                ActorRef sender) throws Exception {
         logger.error(comand.getComandName());
-        sender.tell(new Status.Failure(new SupectCommandeException()), getSelf());
+        throw  new SupectCommandeException();
     }
 
     private void handleComand(HandledComand comand) {
